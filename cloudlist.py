@@ -7,13 +7,13 @@ from pathlib import Path
 from datetime import datetime
 
 def main():
-    """Entry point: Validate input, check dependencies, run wordlist gen, and handle results."""
+    """Entry point: Validate input, check dependencies and handle results."""
     if len(sys.argv) < 2:
-        print("[!] Error: Please provide a subdomain for wordlist generation")
+        print("[!] Error: Please provide a cloud_provider for cloudlist run")
         print("Usage: python3 cloudlist.py example.com")
         sys.exit(1)
     
-    subdomain = sys.argv[1]
+    cloud_provider = sys.argv[1]
 
     if not check_cloudlist_installed():
         print("[!] Error: cloudlist is not installed or not in PATH")
@@ -22,13 +22,13 @@ def main():
     
     activate_venv()
     
-    print(f"[*] Starting cloudlist subdomain wordlist generation for: {subdomain}")
-    exit_code = run_cloudlist_wordlist_generation_and_save(subdomain)
+    print(f"[*] Starting cloudlist run for: {cloud_provider}")
+    exit_code = run_cloudlist_and_save(cloud_provider)
     
     if exit_code == 0:
-        print("[+] wordlist generation completed successfully")
+        print("[+] cloudlist run completed successfully")
     else:
-        print("[!] wordlist generation completed with errors or warnings")
+        print("[!] cloudlist run completed with errors or warnings")
     
     sys.exit(exit_code)
 
@@ -57,10 +57,10 @@ def activate_venv():
         else:
             print("[*] Virtual environment found but Python not detected")
 
-def run_cloudlist_and_save(subdomain):
+def run_cloudlist_and_save(cloud_provider):
     """Run cloudlist and save results to a timestamped file."""
     try:
-        cloudlist_output = run_cloudlist(subdomain)
+        cloudlist_output = run_cloudlist(cloud_provider)
         if cloudlist_output is None:
             print("[!] cloudlist failed or returned no output")
             return 1
@@ -81,7 +81,7 @@ def run_cloudlist_and_save(subdomain):
         return 1 
 
 def run_cloudlist(provider):
-    """Run cloudlist on the given subdomain and return its output as a string, or None on error."""
+    """Run cloudlist on the given cloud_provider and return its output as a string, or None on error."""
     command = [
         "/go/bin/cloudlist",
         "-provider", provider,
@@ -110,7 +110,7 @@ def run_cloudlist(provider):
             return result.stdout if result.stdout.strip() else None
         return result.stdout
     except subprocess.TimeoutExpired:
-        print("[!] cloudlist wordlist generation timed out")
+        print("[!] cloudlist run timed out")
         return None
     except FileNotFoundError:
         print("[!] Error: cloudlist command not found. Please ensure cloudlist is installed and in PATH")
