@@ -28,7 +28,17 @@ def main():
     if exit_code == 0:
         print("[+] cloudlist run completed successfully")
     else:
-        print("[!] cloudlist run completed with errors or warnings")
+        print("[!] cloudlist run completed with errors or warnings. Provider config file required.")    
+        print("--------------------------------")
+        print("https://docs.projectdiscovery.io/tools/cloudlist/running") 
+        print("--------------------------------")
+        print("Example config file content:")
+        print("--------------------------------")
+        print("provider: aws # provider is the name of the provider")
+        print("id: staging # id is the name defined by user for filtering (optional)")
+        print("aws_access_key: $AWS_ACCESS_KEY # aws_access_key is the access key for AWS account")
+        print("aws_secret_key: $AWS_SECRET_KEY # aws_secret_key is the secret key for AWS account")
+        print("aws_session_token: $AWS_SESSION_TOKEN # aws_session_token session token for temporary security credentials retrieved via STS (optional)")
     
     sys.exit(exit_code)
 
