@@ -84,7 +84,7 @@ def run_cloudlist(provider):
     """Run cloudlist on the given subdomain and return its output as a string, or None on error."""
     command = [
         "/go/bin/cloudlist",
-        "-p", provider,
+        "-provider", provider,
         "-silent"
     ]
     print(f"[*] Executing: {' '.join(command)}")
