@@ -1,6 +1,6 @@
 runner:
   name: Cloudlist
-  description: Tool for listing cloud providers and their resources. (Requires a cloud provider config file to run)
+  description: Tool for listing cloud providers and configured resources. (Requires a cloud provider config file to run)
   version: 0.0.1
 
 build:
