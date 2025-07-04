@@ -1,6 +1,6 @@
 runner:
   name: Cloudlist
-  description: Tool for listing cloud providers and configured resources. (Requires a cloud provider config file to run)
+  description: List configured resources for a cloud provider. (Provider config file required per https://docs.projectdiscovery.io/tools/cloudlist/running)
   version: 0.0.1
 
 build:
